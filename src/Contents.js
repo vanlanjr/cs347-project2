@@ -1,19 +1,25 @@
 import React from 'react';
-import './Contents.css';
-import Recipe from './Recipe';
+// import './Contents.css';
+// import Recipe from './Recipe';
 
-function Contents(props) {
+// function Contents(props) {
 
-  const recipes = props.recipes;
+//   const recipes = props.recipes;
 
+//   return (
+//     <div className="table-of-contents">
+//       <ol>
+//         {recipes.map(recipe => <li key= {recipe.name}> {recipe.name} </li>
+//         )}
+//       </ol>
+//     </div>
+//   );
+// }
+
+// export default Contents;
+
+export function Contents(props) {
   return (
-    <div className="table-of-contents">
-      <ol>
-        {recipes.map(recipe => <li key= {recipe.name}> {recipe.name} </li>
-        )}
-      </ol>
-    </div>
+    <h1>Table of Contents</h1>
   );
 }
-
-export default Contents;
