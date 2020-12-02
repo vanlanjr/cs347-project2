@@ -1,5 +1,6 @@
 export const Action = Object.freeze({
   LoadRecipes: 'LoadRecipes',
+  LoadRecipe: 'LoadRecipe',
 });
 
 // This is for hard coding
@@ -27,8 +28,36 @@ export function loadRecipe() {
     .then(response => response.json())
     .then(data => {
       if(data.ok) {
-        console.log(data.recipes);
         dispatch(loadRecipes(data.recipes));
+      }
+    })
+    .catch(e => console.error(e));
+  };
+}
+
+export function startAddingRecipe() {
+  const recipe = {
+    name: '',
+    description: '',
+    ingredients: '',
+    steps: ''
+  };
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(recipe),
+  }
+
+  return dispatch => {
+    fetch(`${host}/recipes`, options)
+    .then(checkForErrors)
+    .then(response => response.json())
+    .then(data => {
+      if(data.ok) {
+        //dispatch(loadRecipes(data.recipes));
       }
     })
     .catch(e => console.error(e));

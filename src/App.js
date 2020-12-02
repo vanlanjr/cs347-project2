@@ -2,7 +2,7 @@ import './App.css';
 import React, {useEffect} from 'react';
 import {Contents} from './Contents';
 import {useSelector, useDispatch} from 'react-redux';
-import {loadRecipe} from './actions';
+import {loadRecipe, startAddingRecipe} from './actions';
 import {Switch, Route, Redirect, NavLink, Link} from 'react-router-dom';
 import {Recipe} from './Recipe';
 
@@ -31,10 +31,22 @@ import {Recipe} from './Recipe';
 // }
 
 function App() {
+
+  const recipes = useSelector(state => state.recipes);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadRecipe());
+  }, [dispatch]);
+
+  const onAdd = () => {
+    dispatch(startAddingRecipe());
+  };
+
   return (
     <div className="cookbook-root">
       <nav>
-        <ul>
+        <ul id="nav-header">
           <li><NavLink to="/contents"
           activeClassName="current-navlink">table of contents
           </NavLink></li>
@@ -44,15 +56,17 @@ function App() {
           <li><Link to="/recipe/edit">new</Link></li>
         </ul>
       </nav>
+
       <Switch>
         <Route exact path="/contents">
-          <Contents />
+          <Contents recipes={recipes}/>
         </Route>
         <Route exact path="/recipe/0">
           <Recipe />
         </Route>
         <Route exact path="/recipe/edit">
           note writer
+          <button onClick={onAdd}>new recipe</button>
         </Route>
         <Redirect to="/contents"/>
       </Switch>

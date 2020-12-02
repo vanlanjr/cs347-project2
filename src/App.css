@@ -1,0 +1,32 @@
+ul#nav-header  {
+  display: flex;
+  flex-direction: row;
+  background-color: #aa0000;
+  overflow: hidden;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+ul#nav-header li {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+
+}
+
+a.header-link {
+	display: block;
+	color: white;
+	background-color: #aa0000;
+	padding: 2px;
+	text-decoration: none;
+}
+
+ul#nav-header li:hover {
+	background-color: rgb(80, 80, 80);
+}

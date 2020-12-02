@@ -14,6 +14,11 @@ function reducer(state = initialState, action) {
         ...state, // all properties of old object
         recipes: action.payload // with new added recipes
       }
+    case Action.LoadRecipe:
+      return { 
+        ...state, // all properties of old object
+        recipes: action.payload // with new added recipes
+      }
     default:
       return state;
   }
