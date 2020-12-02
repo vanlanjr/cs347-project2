@@ -1,3 +1,19 @@
 ul {
   list-style: none;
 }
+
+#root {
+  padding: 20px;
+  width: auto;
+}
+
+h1 {
+  color: white;
+}
+
+#root ul li.content {
+  padding: 5px;
+  font-size: large;
+  font-family: 'Sansita Swashed', cursive;
+  color: white;
+}
