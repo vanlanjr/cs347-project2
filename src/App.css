@@ -9,14 +9,13 @@ ul#nav-header  {
 	overflow: hidden;
 }
 
-ul#nav-header li {
+#nav-header > li {
   float: left;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-
 }
 
 a.header-link {
@@ -29,4 +28,9 @@ a.header-link {
 
 ul#nav-header li:hover {
 	background-color: rgb(80, 80, 80);
+}
+
+.current-navlink {
+  text-decoration: underline;
+  color: yellow;
 }

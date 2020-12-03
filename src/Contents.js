@@ -1,33 +1,19 @@
 import React from 'react';
-import './Contents.css';
-// import Recipe from './Recipe';
-
-// function Contents(props) {
-
-//   const recipes = props.recipes;
-
-//   return (
-//     <div className="table-of-contents">
-//       <ol>
-//         {recipes.map(recipe => <li key= {recipe.name}> {recipe.name} </li>
-//         )}
-//       </ol>
-//     </div>
-//   );
-// }
-
-// export default Contents;
+import {Link} from 'react-router-dom';
 
 export function Contents(props) {
-  const recipes = props.recipes;
-  console.log(recipes);
   return (
-    <div id="root">
+    <React.Fragment>
       <h1>Table of Contents</h1>
-      <hr></hr>
+      {props.recipes.map(recipe =>
+        <li><Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link></li>
+      )}
+      <h3>Food Categories</h3>
       <ul>
-        {recipes.map(recipe => <li class="content" key= {recipe.id}> {recipe.name} </li>)}
+        {[...props.categories].map(category =>
+          <li><Link to={`/recipes/${category}`}>{category}</Link></li>
+        )}
       </ul>
-    </div>
+    </React.Fragment>
   );
 }

@@ -1,16 +1,14 @@
 import './App.css';
-import React, {useEffect} from 'react';
-import {Contents} from './Contents';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {loadRecipe, startAddingRecipe} from './actions';
-import {Switch, Route, Redirect, NavLink, Link} from 'react-router-dom';
+import {Switch, Route, Redirect, NavLink, Link, useHistory} from 'react-router-dom';
 import {Recipe} from './Recipe';
-
-// hard coded recipes for now
-// const recipes = [
-//   {name:"Good Old Fashioned Pancakes",description:"Pancakes that are old fashioned",ingredients:"1 1/2 flour, 3 1/2 baking powder, 1 teaspoon salt, 1 tablespoon white sugar, 1 egg, 1 1/4 cups milk, 3 tablespoon butter",steps:"1. In a large bowl, sift together the flour, baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; mix until smooth. 2.Heat a lightly oiled griddle or frying pan over medium-high heat. Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot."},
-//   {name:"Green eggs and ham",description:"Dr seusses favorite meal",ingredients:"1 green egg and 1 ham",steps:"1. cook the egss. 2. cook the ham. 3. eat the food."}
-// ];
+import {Categories} from './Categories';
+import {Recipes} from './Recipes';
+import {Contents} from './Contents';
+import {RecipeReader} from './RecipeReader';
+import {RecipeWriter} from './RecipeWriter';
 
 // function App() {
 
@@ -30,17 +28,93 @@ import {Recipe} from './Recipe';
 //   );
 // }
 
+const initialDatabase = {
+  recipes: [
+    {
+      id: 0,
+      name: 'old fashionned pancakes',
+      description: 'delicious meal',
+      ingredients: 'bunch of pancakes',
+      steps: 'cook em',
+      categories: new Set(['breakfast', 'sweet']),
+    },
+    {
+      id: 1,
+      name: 'green eggs and ham',
+      description: 'yummy meal',
+      ingredients: 'eggs and ham',
+      steps: 'fry em',
+      categories: new Set(['breakfast', 'healthy']),
+    },
+    {
+      id: 2,
+      name: 'sandwich',
+      description: 'easy to make meal',
+      ingredients: 'turkey, ham, and cheese',
+      steps: 'put them together',
+      categories: new Set(['lunch']),
+    },
+    {
+      id: 3,
+      name: 'ice cream sundae',
+      description: 'delicious desert',
+      ingredients: 'vanilla ice cream, caramel, and fudge',
+      steps: 'put the caramel and fudge on the ice cream',
+      categories: new Set(['dessert', 'sweet']),
+    },
+  ],
+  categories: new Set(['breakfast', 'sweet', 'lunch', 'healthy', 'dessert']),
+}
+
 function App() {
 
-  const recipes = useSelector(state => state.recipes);
-  const dispatch = useDispatch();
+  // const recipes = useSelector(state => state.recipes);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadRecipe());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadRecipe());
+  // }, [dispatch]);
 
-  const onAdd = () => {
-    dispatch(startAddingRecipe());
+  // const onAdd = () => {
+  //   dispatch(startAddingRecipe());
+  // };
+
+  const [database, setDatabase] = useState(initialDatabase);
+  const history = useHistory();
+
+  const saveRecipe = savedRecipe => {
+    const newCategories = new Set(database.categories);
+    for (let category of savedRecipe.categories) {
+      newCategories.add(category);
+    }
+
+    let id = savedRecipe.id;
+    let newRecipes;
+    /* handles case for brand new recipe */
+    if (id < 0) {
+      id = database.recipes.length;
+      newRecipes = [
+        ...database.recipes,
+        {...savedRecipe, id},
+      ];
+    } 
+    /* handles editing existing recipes */
+    else {
+      newRecipes = database.recipes.map(recipe =>{
+        if (recipe.id === id) {
+          return savedRecipe;
+        } else {
+          return recipe;
+        }
+      });
+    }
+
+    setDatabase({
+      categories: newCategories,
+      recipes: newRecipes,
+    });
+
+    history.push(`/recipe/${id}`);
   };
 
   return (
@@ -48,26 +122,40 @@ function App() {
       <nav>
         <ul id="nav-header">
           <li><NavLink to="/contents"
-          activeClassName="current-navlink">table of contents
+          activeClassName="current-navlink">Table of Contents
           </NavLink></li>
-          <li><NavLink to="/recipe/0"
-          activeClassName="current-navlink">page 1
-          </NavLink></li>
-          <li><Link to="/recipe/edit">new</Link></li>
+          <li><NavLink to="/recipes"
+          activeClassName="current-navlink">Recipes
+          </NavLink></li>  
+          <li><Link to="/recipe/new">new</Link></li>
         </ul>
       </nav>
 
       <Switch>
         <Route exact path="/contents">
-          <Contents recipes={recipes}/>
+          <Contents recipes={database.recipes} categories={database.categories}/>
         </Route>
-        <Route exact path="/recipe/0">
-          <Recipe />
+        <Route exact path="/recipes">
+          <Recipes recipes={database.recipes}/>
         </Route>
-        <Route exact path="/recipe/edit">
-          note writer
-          <button onClick={onAdd}>new recipe</button>
+        <Route exact path="/recipes/:category" children={props =>
+          <Recipes recipes={database.recipes.filter(recipe => 
+            recipe.categories.has(props.match.params.category))}/>
+        } />
+        <Route exact path="/recipe/new">
+          <RecipeWriter recipe={{id: -1, name: '', description: '', ingredients: '', 
+            steps: '', categories: new Set()}} saveRecipe={saveRecipe}/>
         </Route>
+        <Route exact path="/recipe/:id" children={props => {
+          const id = parseInt(props.match.params.id);
+          const recipe = database.recipes.find(recipe => recipe.id === id);
+          return <RecipeReader recipe={recipe} />;
+         }}/>
+         <Route exact path="/recipe/:id/edit" children={props => {
+          const id = parseInt(props.match.params.id);
+          const recipe = database.recipes.find(recipe => recipe.id === id);
+          return <RecipeWriter recipe={recipe} saveRecipe={saveRecipe}/>;
+         }}/>
         <Redirect to="/contents"/>
       </Switch>
     </div>

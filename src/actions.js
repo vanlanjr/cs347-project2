@@ -1,6 +1,7 @@
 export const Action = Object.freeze({
   LoadRecipes: 'LoadRecipes',
   LoadRecipe: 'LoadRecipe',
+  FinishAddingRecipe: 'FinishAddingRecipe',
 });
 
 // This is for hard coding
@@ -9,6 +10,13 @@ export function loadRecipes(recipes) {
     type: Action.LoadRecipes,
     payload: recipes,
   }
+}
+
+export function finishAddingRecipe(recipe) {
+  return {
+    type: Action.FinishAddingRecipe,
+    payload: recipe,
+  };
 }
 
 function checkForErrors(response) {
@@ -57,6 +65,8 @@ export function startAddingRecipe() {
     .then(response => response.json())
     .then(data => {
       if(data.ok) {
+        recipe.id = data.id;
+        dispatch(finishAddingRecipe(recipe));
         //dispatch(loadRecipes(data.recipes));
       }
     })
