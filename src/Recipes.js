@@ -6,7 +6,7 @@ export function Recipes(props) {
     <React.Fragment>
       <h1>Recipes</h1>
       {props.recipes.map(recipe => 
-        <li><Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link></li>
+        <li key={recipe.id}><Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link></li>
       )}
     </React.Fragment>
   );

@@ -129,7 +129,7 @@ function App() {
 
       <Switch>
         <Route exact path="/contents">
-          <Contents recipes={database.recipes} categories={database.categories}/>
+          <Contents  recipes={database.recipes} categories={database.categories}/>
         </Route>
         <Route exact path="/recipes">
           <Recipes recipes={database.recipes}/>

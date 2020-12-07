@@ -20,7 +20,7 @@ export function RecipeWriter(props) {
   };
 
   return (
-    <div class="writer-root">
+    <div className="writer-root">
       <h1>Name</h1>
       <input 
         type="text" 

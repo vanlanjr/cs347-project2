@@ -6,12 +6,12 @@ export function Contents(props) {
     <React.Fragment>
       <h1>Table of Contents</h1>
       {props.recipes.map(recipe =>
-        <li><Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link></li>
+        <li key={recipe.id}><Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link></li>
       )}
       <h3>Food Categories</h3>
       <ul>
         {[...props.categories].map(category =>
-          <li><Link to={`/recipes/${category}`}>{category}</Link></li>
+          <li key={category}><Link to={`/recipes/${category}`}>{category}</Link></li>
         )}
       </ul>
     </React.Fragment>
