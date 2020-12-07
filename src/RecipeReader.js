@@ -9,8 +9,21 @@ export function RecipeReader(props) {
     history.push(`/recipe/${recipe.id}/edit`);
   }
 
+  const previousRecipe = () => {
+    if (recipe.id > 0) {
+      history.push(`/recipe/${recipe.id - 1}`);
+    }
+  };
+
+  const nextRecipe = () => {
+    if (recipe.id < props.totalRecipes - 1) {
+      history.push(`/recipe/${recipe.id + 1}`);
+    }
+  };
+
   return (
     <React.Fragment>
+      
       <h1>{recipe.name}</h1>
       <div>
         <h3>Description</h3>
@@ -23,6 +36,8 @@ export function RecipeReader(props) {
         <p>{[...recipe.categories].join(', ')}</p>
       </div>
       <button onClick={editRecipe}>Edit</button>
+      <button onClick={previousRecipe}>Prev</button>
+      <button onClick={nextRecipe}>Next</button>
     </React.Fragment>
   );
 }

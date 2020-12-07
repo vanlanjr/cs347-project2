@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
 
 export function RecipeWriter(props) {
   const {recipe, saveRecipe} = props;

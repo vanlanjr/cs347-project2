@@ -1,10 +1,6 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {loadRecipe, startAddingRecipe} from './actions';
+import React, {useState} from 'react';
 import {Switch, Route, Redirect, NavLink, Link, useHistory} from 'react-router-dom';
-import {Recipe} from './Recipe';
-import {Categories} from './Categories';
 import {Recipes} from './Recipes';
 import {Contents} from './Contents';
 import {RecipeReader} from './RecipeReader';
@@ -149,7 +145,7 @@ function App() {
         <Route exact path="/recipe/:id" children={props => {
           const id = parseInt(props.match.params.id);
           const recipe = database.recipes.find(recipe => recipe.id === id);
-          return <RecipeReader recipe={recipe} />;
+          return <RecipeReader recipe={recipe} totalRecipes={database.recipes.length}/>;
          }}/>
          <Route exact path="/recipe/:id/edit" children={props => {
           const id = parseInt(props.match.params.id);
