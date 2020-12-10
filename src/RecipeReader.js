@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 
 export function RecipeReader(props) {
 
-  const {recipe} = props;
+  const recipe = props.recipe;
   const history = useHistory();
 
   const editRecipe = () => {
@@ -12,13 +12,14 @@ export function RecipeReader(props) {
   }
 
   const previousRecipe = () => {
-    if (recipe.id > 0) {
+    if (recipe.id > 1) {
       history.push(`/recipe/${recipe.id - 1}`);
     }
   };
 
   const nextRecipe = () => {
-    if (recipe.id < props.totalRecipes - 1) {
+    console.log('next recipe');
+    if (recipe.id < props.totalRecipes) {
       history.push(`/recipe/${recipe.id + 1}`);
     }
   };
@@ -33,8 +34,10 @@ export function RecipeReader(props) {
         <p>{recipe.ingredients}</p>
         <h3>Steps</h3>
         <p>{recipe.steps}</p>
-        <h3>Categories</h3>
-        <p>{[...recipe.categories].join(', ')}</p>
+
+        {/* <h3>Categories</h3>
+        <p>{[...recipe.categories].join(', ')}</p> */}
+
         <button onClick={editRecipe}>Edit</button>
         <div id="nav-buttons">
           <button onClick={previousRecipe}>Prev</button>

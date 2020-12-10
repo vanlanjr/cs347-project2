@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import { startAddingRecipe } from './actions';
 
 export function RecipeWriter(props) {
   const {recipe, saveRecipe} = props;
@@ -6,17 +8,12 @@ export function RecipeWriter(props) {
   const [description, setDescription] = useState(recipe.description);
   const [ingredients, setIngredients] = useState(recipe.ingredients);
   const [steps, setSteps] = useState(recipe.steps);
-  const [categories, setCategories] = useState([...recipe.categories].join(', '));
+  //const [categories, setCategories] = useState([...recipe.categories].join(', '));
+  
+  const dispatch = useDispatch();
 
   const onSave = () => {
-    saveRecipe({
-      id: recipe.id,
-      name,
-      description,
-      ingredients,
-      steps,
-      categories: new Set(categories.split(', ')),
-    })
+    dispatch(startAddingRecipe(name, description, ingredients, steps));
   };
 
   return (
@@ -42,12 +39,7 @@ export function RecipeWriter(props) {
         value={steps}
         onChange={e => setSteps(e.target.value)}
       />
-      <h3>Categories</h3>
-      <input 
-        type="text" 
-        value={categories}
-        onChange={e => setCategories(e.target.value)}
-      />
+
       <button onClick={onSave}>Save</button>
     </div>
   );

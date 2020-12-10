@@ -4,6 +4,7 @@ export const Action = Object.freeze({
   FinishAddingRecipe: 'FinishAddingRecipe',
 });
 
+
 // This is for hard coding
 export function loadRecipes(recipes) {
   return {
@@ -28,6 +29,23 @@ function checkForErrors(response) {
 
 const host = 'https://cookbook-api.jvfunweb.me:8442';
 
+export function getRecipes() {
+  return dispatch => {
+    fetch(`${host}/recipes`)
+      .then(checkForErrors)
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          // we will have data.recipes
+          //console.log(data);
+          dispatch(loadRecipes(data.recipes));
+        }
+    })
+    .catch(e => console.error(e));
+  };
+
+}
+
 // This is for pulling from web service
 export function loadRecipe() {
   return dispatch => {
@@ -43,12 +61,13 @@ export function loadRecipe() {
   };
 }
 
-export function startAddingRecipe() {
+export function startAddingRecipe(name, description, ingredients, steps) {
+
   const recipe = {
-    name: '',
-    description: '',
-    ingredients: '',
-    steps: ''
+    name,
+    description,
+    ingredients,
+    steps
   };
 
   const options = {
@@ -60,14 +79,13 @@ export function startAddingRecipe() {
   }
 
   return dispatch => {
-    fetch(`${host}/recipes`, options)
+    fetch(`${host}/recipe`, options)
     .then(checkForErrors)
     .then(response => response.json())
     .then(data => {
       if(data.ok) {
         recipe.id = data.id;
         dispatch(finishAddingRecipe(recipe));
-        //dispatch(loadRecipes(data.recipes));
       }
     })
     .catch(e => console.error(e));
