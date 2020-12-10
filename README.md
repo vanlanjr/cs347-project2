@@ -1,3 +1,71 @@
+### Project 2 Rubric Breakdown
+
+1. You will create an app that has a coherent purpose and satisfies a personal creative itch.
+- Dylan and I are passionate chefs seeking enlightenment in the art of cooking. We have always wanted break the norm and keep all of our secret recipes in a secure   database on the web that can be accessed through a secret client.
+
+2. You will not write a to-do list management app.
+- We wrote a cookbook recipe management app which is different from a to-do list management app.
+
+3. You may work with a partner or as an individual.
+- We worked as a group.
+
+4. The code must be written by you and your partner, and any assets must be made by you and your partner or conform to their license.
+- We did not use any package or code that was obtained from an outside source.
+
+5. Your app will have both a back-end data store and web service and a front-end client.
+- This is true. We have a back-end mysql database that is stored on Jason's droplet and is accessed by the client through the web service. The web service url is https://cookbook-api.jvfunweb.me:8442
+
+6. You will create a front-end client using React’s functional components and hooks. (Do not use classes for making components.)
+- Our front-end client is React based with different components. It utilizes React Routers for the components to mimimic a multi-page application.
+
+7. The content of your client must change dynamically as the user interacts with it. (Sites with only static content generally should not be written with React.)
+- Our app has the ability to add new recipes into the data store. This changes the client by adding new recipes to the list.  Existing recipes can also be edited which changes the appearance of client.
+
+8. You will manage state in your client using Redux.
+- Our client uses useSelector() and UseDispatch() from the react redux store to manage the state of the client as new recipes are added and edited.
+
+9. The user interface of your client should follow the aesthetic and usability principles described in project 1, including clean spacing, coherent alignment, sufficient contrast, harmonious colors, and responsive design.
+- 
+
+10. You will access your web service from your client using your own calls to fetch and not through any helper library.
+- 
+
+11. You will indicate asynchronous activity to the user via the GUI. For example, while a fetch executes, you show a progress wheel.
+- 
+
+12. Your client must be free from all warnings and errors.
+- 
+
+13. Your front-end client must be stored in a Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
+- 
+
+14. Your front-end client must be available through the URL https://project2.YOUR-DOMAIN-NAME. It must be served out via HTTPS over port 443. If visitors access your client through port 80, they must be redirected automatically to port 443. The configuration is very similar to that of project 1.
+- 
+
+15. Your app will store its data long-term in a relational database. There’s nothing wrong with NoSQL databases like MongoDB, but they are intentionally outlawed to align our focus and to give us more experience with relational databases. Your database need not have multiple tables.
+- 
+
+16. You will provide an Express-based web service for interacting with the database. The service must only be directly accessible from your droplet, and not from outside. Use ufw to block all ports but the ones you need for SSH and your allowed web servers.
+- 
+
+17. The web service must communicate send and receive complex data as JSON.
+- 
+
+18. The endpoints of the web service and any parameters should be appropriately named.
+- 
+
+19. The web service must support cross-origin resource sharing.
+-
+
+20. Your web service must be started using a process manager like pm2 so that it stays running.
+- 
+
+21. You will create an Nginx server that allows global, encrypted access to your web service.
+- 
+
+22. Your back-end must be stored in a separate Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
+- 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
