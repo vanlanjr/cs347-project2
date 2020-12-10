@@ -123,7 +123,7 @@ function App() {
           <li><NavLink to="/recipes"
           activeClassName="current-navlink">Recipes
           </NavLink></li>  
-          <li><Link to="/recipe/new">new</Link></li>
+          <li><Link to="/recipe/new">Add Recipe</Link></li>
         </ul>
       </nav>
 

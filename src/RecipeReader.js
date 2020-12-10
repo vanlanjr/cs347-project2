@@ -1,4 +1,5 @@
 import React from 'react';
+import './Recipe.css'
 import {useHistory} from 'react-router-dom';
 
 export function RecipeReader(props) {
@@ -24,9 +25,8 @@ export function RecipeReader(props) {
 
   return (
     <React.Fragment>
-      
       <h1>{recipe.name}</h1>
-      <div>
+      <div id="reader">
         <h3>Description</h3>
         <p>{recipe.description}</p>
         <h3>Ingredients</h3>
@@ -35,10 +35,12 @@ export function RecipeReader(props) {
         <p>{recipe.steps}</p>
         <h3>Categories</h3>
         <p>{[...recipe.categories].join(', ')}</p>
+        <button onClick={editRecipe}>Edit</button>
+        <div id="nav-buttons">
+          <button onClick={previousRecipe}>Prev</button>
+          <button onClick={nextRecipe}>Next</button>
+        </div>
       </div>
-      <button onClick={editRecipe}>Edit</button>
-      <button onClick={previousRecipe}>Prev</button>
-      <button onClick={nextRecipe}>Next</button>
     </React.Fragment>
   );
 }

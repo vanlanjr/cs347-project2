@@ -11,9 +11,7 @@ h1, h3 {
   color: white;
 }
 
-#root ul li.content {
-  padding: 5px;
-  font-size: large;
+#link, p {
   font-family: 'Sansita Swashed', cursive;
   color: white;
 }
