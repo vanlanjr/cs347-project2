@@ -6,6 +6,7 @@ import {RecipeReader} from './RecipeReader';
 import {RecipeWriter} from './RecipeWriter';
 import {useSelector, useDispatch} from 'react-redux';
 import {getRecipes} from './actions';
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
 
@@ -14,8 +15,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     dispatch(getRecipes());
   }, [dispatch]);
+
+  const isWaiting = useSelector(state => state.isWaiting);
 
   return (
 
@@ -31,6 +35,7 @@ function App() {
 
       <Switch>
         <Route exact path="/recipes">
+          {isWaiting && <ClipLoader color={"#123abc"}/>}
           <Contents recipes={recipes}/>
         </Route>
         <Route exact path="/recipe/new">
