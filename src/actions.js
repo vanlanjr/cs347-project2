@@ -3,6 +3,7 @@ export const Action = Object.freeze({
   LoadRecipe: 'LoadRecipe',
   FinishAddingRecipe: 'FinishAddingRecipe',
   FinishSavingRecipe: 'FinishSavingRecipe',
+  FinishDeletingRecipe: 'FinishDeletingRecipe',
   EnterEditMode: 'EnterEditMode',
   LeaveEditMode: 'LeaveEditMode',
 });
@@ -26,6 +27,13 @@ export function finishAddingRecipe(recipe) {
 export function finishSavingRecipe(recipe) {
   return {
     type: Action.FinishSavingRecipe,
+    payload: recipe,
+  };
+}
+
+export function finishDeletingRecipe(recipe) {
+  return {
+    type: Action.FinishDeletingRecipe,
     payload: recipe,
   };
 }
@@ -118,7 +126,6 @@ export function startAddingRecipe(name, description, ingredients, steps) {
 }
 
 export function startSavingRecipe(recipe) {
-
   const options = {
     method: 'PATCH',
     headers: {
@@ -134,6 +141,24 @@ export function startSavingRecipe(recipe) {
     .then(data => {
       if(data.ok) {
         dispatch(finishSavingRecipe(recipe));
+      }
+    })
+    .catch(e => console.error(e));
+  };
+}
+
+export function startDeletingRecipe(recipe) {
+  const options = {
+    method: 'DELETE',
+  };
+
+  return dispatch => {
+    fetch(`${host}/recipe/${recipe.id}`, options)
+    .then(checkForErrors)
+    .then(response => response.json())
+    .then(data => {
+      if(data.ok) {
+        dispatch(finishDeletingRecipe(recipe));
       }
     })
     .catch(e => console.error(e));

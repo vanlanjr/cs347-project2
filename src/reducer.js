@@ -13,6 +13,7 @@ function reducer(state = initialState, action) {
       return {
         ...state, // all properties of old object
         recipes: action.payload // with new added recipes
+        
       }
     case Action.LoadRecipe:
       return { 
@@ -67,6 +68,11 @@ function reducer(state = initialState, action) {
             return recipe;
           }
         }),
+      };
+    case Action.FinishDeletingRecipe:
+      return {
+        ...state,
+        recipes: state.recipes.filter(recipe => recipe.id !== action.payload.id),
       };
     default:
       return state;
