@@ -7,6 +7,7 @@ import {RecipeReader} from './RecipeReader';
 import {RecipeWriter} from './RecipeWriter';
 import {useSelector, useDispatch} from 'react-redux';
 import {getRecipes, startAddingRecipe} from './actions';
+
 // function App() {
 
 //   const recipes = useSelector(state => state.recipes);
@@ -116,6 +117,8 @@ function App() {
 
   const recipes = useSelector(state => state.recipes);
 
+  //const [database, setDatabase] = useState(recipes);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -139,25 +142,30 @@ function App() {
       </nav>
 
       <Switch>
+
         <Route exact path="/recipes">
           <Contents recipes={recipes}/>
         </Route>
-        <Route exact path="/recipe/:id" children={props => {
-          const id = parseInt(props.match.params.id);
-
-          const recipe = recipes.filter(recipe => recipe.id == id);
-
-          return <RecipeReader recipe={recipe[0]} totalRecipes={recipes.length}/>;
-         }}/>
-
-        {/* <Route exact path="/recipe/:id">
-        
-        </Route> */}
 
         <Route exact path="/recipe/new">
           <RecipeWriter recipe={{id: -1, name: '', description: '', ingredients: '', 
             steps: ''}}/>
         </Route>
+
+        <Route exact path="/recipe/:id/edit" children={props => {
+          const id = parseInt(props.match.params.id);
+          const recipe = recipes.find(recipe => recipe.id === id);
+
+          return <RecipeWriter recipe={recipe} /*saveRecipe={saveRecipe}*//>;
+         }}/>
+
+        <Route exact path="/recipe/:id" children={props => {
+          const id = parseInt(props.match.params.id);
+          const recipe = recipes.find(recipe => recipe.id === id);
+
+          return <RecipeReader recipe={recipe} totalRecipes={recipes.length}/>;
+        }}/>
+
         {/*
         <Route exact path="/recipes/:category" children={props =>
           <Recipes recipes={database.recipes.filter(recipe => 

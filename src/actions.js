@@ -47,7 +47,8 @@ export function getRecipes() {
 }
 
 // This is for pulling from web service
-export function loadRecipe() {
+export function loadRecipe(recipeID) {
+  console.log('trying to load recipe');
   return dispatch => {
     fetch(`${host}/recipes`)
     .then(checkForErrors)

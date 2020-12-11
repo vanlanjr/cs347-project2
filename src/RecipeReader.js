@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Recipe.css'
 import {useHistory} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {loadRecipe} from './actions';
 
 export function RecipeReader(props) {
 
-  const recipe = props.recipe;
+  const {recipe} = props;
+
   const history = useHistory();
 
   const editRecipe = () => {
@@ -36,14 +39,14 @@ export function RecipeReader(props) {
         <p>{recipe.steps}</p>
 
         {/* <h3>Categories</h3>
-        <p>{[...recipe.categories].join(', ')}</p> */}
+        <p>{[...recipe.categories].join(', ')}</p>*/}
 
         <button onClick={editRecipe}>Edit</button>
         <div id="nav-buttons">
           <button onClick={previousRecipe}>Prev</button>
           <button onClick={nextRecipe}>Next</button>
         </div>
-      </div>
+      </div> 
     </React.Fragment>
   );
 }
