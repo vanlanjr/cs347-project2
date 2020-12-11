@@ -70,17 +70,31 @@ export function RecipeReader(props) {
           <input type="text" value={name}
             onChange={e => setName(e.target.value)}/>
           <h3>Description</h3>
-          <input type="text" value={description}
-            onChange={e => setDescription(e.target.value)}/>
+            <textarea 
+              rows="15" 
+              cols="50" 
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
           <h3>Ingredients</h3>
-          <input type="text" value={ingredients}
-            onChange={e => setIngredients(e.target.value)}/>
+            <textarea 
+              rows="15" 
+              cols="50" 
+              value={ingredients}
+              onChange={e => setIngredients(e.target.value)}
+            />
           <h3>Steps</h3>
-          <input type="text" value={steps}
-            onChange={e => setSteps(e.target.value)}/>
-          <button onClick={onSave}>Save</button>
-          <button onClick={onCancel}>Cancel</button>
-           <button onClick={onDelete}>Delete</button>
+            <textarea 
+              rows="15" 
+              cols="50" 
+              value={steps}
+              onChange={e => setSteps(e.target.value)}
+            />
+          <div>
+            <button onClick={onSave}>Save</button>
+            <button onClick={onCancel}>Cancel</button>
+            <button onClick={onDelete}>Delete</button>
+          </div>
         </div> 
       </React.Fragment>
     );

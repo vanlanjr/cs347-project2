@@ -2,5 +2,10 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
 
+#desc-input, #ingr-input, #steps-input {
+  height: 200px;
+
+  width: 450px;
 }

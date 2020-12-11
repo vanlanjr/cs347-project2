@@ -27,16 +27,22 @@ export function RecipeWriter(props) {
       />
       <h3>Description</h3>
       <textarea
+        rows="15"
+        cols="50"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
       <h3>Ingredients</h3>
       <textarea 
+        rows="15"
+        cols="50"
         value={ingredients}
         onChange={e => setIngredients(e.target.value)}
       />
       <h3>Steps</h3>
       <textarea 
+        rows="15"
+        cols="50"
         value={steps}
         onChange={e => setSteps(e.target.value)}
       />
