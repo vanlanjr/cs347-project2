@@ -28,7 +28,7 @@
 - 
 
 10. You will access your web service from your client using your own calls to fetch and not through any helper library.
-- 
+- This is true. Our client sends basic fetch calls to the web service's endpoints to recieve specific information. In our entire program, we do not use any helper libraries of any sort.
 
 11. You will indicate asynchronous activity to the user via the GUI. For example, while a fetch executes, you show a progress wheel.
 - 
@@ -37,7 +37,7 @@
 - 
 
 13. Your front-end client must be stored in a Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
-- 
+-  
 
 14. Your front-end client must be available through the URL https://project2.YOUR-DOMAIN-NAME. It must be served out via HTTPS over port 443. If visitors access your client through port 80, they must be redirected automatically to port 443. The configuration is very similar to that of project 1.
 - 
