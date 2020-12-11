@@ -2,6 +2,9 @@ export const Action = Object.freeze({
   LoadRecipes: 'LoadRecipes',
   LoadRecipe: 'LoadRecipe',
   FinishAddingRecipe: 'FinishAddingRecipe',
+  FinishSavingRecipe: 'FinishSavingRecipe',
+  EnterEditMode: 'EnterEditMode',
+  LeaveEditMode: 'LeaveEditMode',
 });
 
 
@@ -16,6 +19,27 @@ export function loadRecipes(recipes) {
 export function finishAddingRecipe(recipe) {
   return {
     type: Action.FinishAddingRecipe,
+    payload: recipe,
+  };
+}
+
+export function finishSavingRecipe(recipe) {
+  return {
+    type: Action.FinishSavingRecipe,
+    payload: recipe,
+  };
+}
+
+export function enterEditMode(recipe) {
+  return {
+    type: Action.EnterEditMode,
+    payload: recipe,
+  };
+}
+
+export function leaveEditMode(recipe) {
+  return {
+    type: Action.LeaveEditMode,
     payload: recipe,
   };
 }
@@ -87,6 +111,29 @@ export function startAddingRecipe(name, description, ingredients, steps) {
       if(data.ok) {
         recipe.id = data.id;
         dispatch(finishAddingRecipe(recipe));
+      }
+    })
+    .catch(e => console.error(e));
+  };
+}
+
+export function startSavingRecipe(recipe) {
+
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(recipe),
+  }
+
+  return dispatch => {
+    fetch(`${host}/recipe/${recipe.id}`, options)
+    .then(checkForErrors)
+    .then(response => response.json())
+    .then(data => {
+      if(data.ok) {
+        dispatch(finishSavingRecipe(recipe));
       }
     })
     .catch(e => console.error(e));

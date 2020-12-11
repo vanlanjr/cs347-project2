@@ -24,6 +24,50 @@ function reducer(state = initialState, action) {
         ...state, 
         recipes: [...state.recipes, action.payload],  // new recipe goes to the back
       }
+    case Action.EnterEditMode:
+      return {
+        ...state,
+        recipes: state.recipes.map(recipe => {
+          if (recipe.id === action.payload.id) {
+            return {...recipe, isEditing: true};
+          } else {
+            return recipe;
+          }
+        }),
+      };
+    case Action.LeaveEditMode:
+      return {
+        ...state,
+        recipes: state.recipes.map(recipe => {
+          if (recipe.id === action.payload.id) {
+            return {...recipe, isEditing: undefined};
+          } else {
+            return recipe;
+          }
+        }),
+      };
+    case Action.LeaveEditMode:
+      return {
+        ...state,
+        recipes: state.recipes.map(recipe => {
+          if (recipe.id === action.payload.id) {
+            return {...recipe, isEditing: undefined};
+          } else {
+            return recipe;
+          }
+        }),
+      };
+    case Action.FinishSavingRecipe:
+      return {
+        ...state,
+        recipes: state.recipes.map(recipe => {
+          if (recipe.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return recipe;
+          }
+        }),
+      };
     default:
       return state;
   }

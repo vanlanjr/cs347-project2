@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { startAddingRecipe } from './actions';
+import { startAddingRecipe, startSavingRecipe } from './actions';
+
 
 export function RecipeWriter(props) {
 
@@ -14,8 +15,18 @@ export function RecipeWriter(props) {
   const dispatch = useDispatch();
 
   const onSave = () => {
-    dispatch(startAddingRecipe(name, description, ingredients, steps));
-  };
+    dispatch(startSavingRecipe({
+      id: recipe.id,
+      name,
+      description,
+      ingredients,
+      steps,
+    }));
+  }
+
+  // const onSave = () => {
+  //   dispatch(startAddingRecipe(name, description, ingredients, steps));
+  // };
 
   return (
     <div className="writer-root">
