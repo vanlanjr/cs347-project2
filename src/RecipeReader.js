@@ -1,5 +1,4 @@
 import React, { useState} from 'react';
-import './Recipe.css'
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {enterEditMode, leaveEditMode, startSavingRecipe, startDeletingRecipe} from './actions';
@@ -27,30 +26,6 @@ export function RecipeReader(props) {
     dispatch(startDeletingRecipe(recipe));
     history.push(`/recipe`);
   }
-
-  const previousRecipe = () => {
-    console.log()
-    let index = recipe.id;
-    let stopFlag = true;
-    while (index > 1 && stopFlag) {
-      index--;
-      if (!recipe.is_deleted) {
-        history.push(`/recipe/${index}`);
-        stopFlag = false;
-      }
-    }
-  };
-
-  const nextRecipe = () => {
-    let index = recipe.id;
-    console.log(props.totalRecipes);
-    while (index < props.totalRecipes) {
-      if (!recipe.is_deleted) {
-        history.push(`/recipe/${index}`);
-      }
-      index++;
-    }
-  };
 
   const onSave = () => {
     dispatch(startSavingRecipe({
@@ -110,10 +85,6 @@ export function RecipeReader(props) {
           <h3>Steps</h3>
           <p>{recipe.steps}</p>
           <button onClick={editRecipe}>Edit</button>
-          <div id="nav-buttons">
-            <button onClick={previousRecipe}>Prev</button>
-            <button onClick={nextRecipe}>Next</button>
-          </div>
         </div> 
       </React.Fragment>
     );

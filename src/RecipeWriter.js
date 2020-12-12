@@ -46,7 +46,6 @@ export function RecipeWriter(props) {
         value={steps}
         onChange={e => setSteps(e.target.value)}
       />
-
       <button onClick={onSave}>Save</button>
     </div>
   );
