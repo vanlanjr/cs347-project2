@@ -28,7 +28,7 @@
 - The client follows the principles that are outlined in project 1. All headers and text areas are left aligned. There is also padding between the buttons so that they are clearly seperated. We also added our own favicon. The colors have contrast from the background so that they can be easily seen.  
 
 10. You will access your web service from your client using your own calls to fetch and not through any helper library.
-- This is true. Our client sends basic fetch calls to the web service's endpoints to recieve specific information. In our entire program, we do not use any helper libraries of any sort.
+- This is true. Our client sends basic fetch calls to the web service's endpoints to recieve specific information. In our entire program, we do not use any helper libraries for fetch calls. 
 
 11. You will indicate asynchronous activity to the user via the GUI. For example, while a fetch executes, you show a progress wheel.
 - When loading recipes on the main page and in other fetch calls, a blue progress wheel pops up 
@@ -37,7 +37,7 @@
 - Our client is free from all warnings and errors in the terminal when the app is started. Additionally, the html and css sheets are free from warnings and errors in the Nu HTML checker.
 
 13. Your front-end client must be stored in a Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
--  Our front end client source code is on a Git repository
+-  Our front end client source code is on a Github repository
 
 14. Your front-end client must be available through the URL https://project2.YOUR-DOMAIN-NAME. It must be served out via HTTPS over port 443. If visitors access your client through port 80, they must be redirected automatically to port 443. The configuration is very similar to that of project 1.
 - This project is served out through https://project2.jvfunweb.me.  When users try to access it through port 80, they are automatically redirected to port 443.
@@ -46,7 +46,7 @@
 - We store our recipes data in a mysql SQL database that is downloaded on our droplet.
 
 16. You will provide an Express-based web service for interacting with the database. The service must only be directly accessible from your droplet, and not from outside. Use ufw to block all ports but the ones you need for SSH and your allowed web servers.
-- 
+- We use an Express-based web service to interact with the database. On the web service, port 3443 is blocked so the data cannot be accessed from the outside. For example, going to http://cookbook-api.jvfunweb.me:3443/recipes is blocked and will not load anything.
 
 17. The web service must communicate send and receive complex data as JSON.
 - We send our recipe data as JSON through the web service api.
