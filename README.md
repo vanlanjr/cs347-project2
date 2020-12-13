@@ -34,7 +34,7 @@
 - When loading recipes on the main page and in other fetch calls, a blue progress wheel pops up 
 
 12. Your client must be free from all warnings and errors.
-- 
+- Our client is free from all warnings and errors in the terminal when the app is started. Additionally, the html and css sheets are free from warnings and errors in the Nu HTML checker.
 
 13. Your front-end client must be stored in a Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
 -  Our front end client source code is on a Git repository
@@ -49,22 +49,22 @@
 - 
 
 17. The web service must communicate send and receive complex data as JSON.
-- We send our recipe data as JSON
+- We send our recipe data as JSON.
 
 18. The endpoints of the web service and any parameters should be appropriately named.
-- We appropriately named our endpoints. For example, for adding a new recipe, the endpoint is '/recipe/new'
+- We appropriately named our endpoints. For example, for adding a new recipe, the endpoint is '/recipe/new'.
 
 19. The web service must support cross-origin resource sharing.
--
+- 
 
 20. Your web service must be started using a process manager like pm2 so that it stays running.
-- 
+- This is true.  The web service uses pm2 so that it is always running.
 
 21. You will create an Nginx server that allows global, encrypted access to your web service.
-- 
+- This is true.  I created a Nginx server on my dropelt that is used to access the web service.
 
 22. Your back-end must be stored in a separate Git repository that you have shared with your instructor. On GitHub, GitLab, and Bitbucket, share with the user twodee.
-- Our database back end server is in a git repository separate from our client. It is shared with the instructor
+- Our database back end server is in a git repository separate from our client. It is shared with the instructor.
 
 # Getting Started with Create React App
 
